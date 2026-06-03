@@ -885,5 +885,342 @@ const database = [
         correctAnswer: "B"
       }
     ]
-  }
+  },
+{
+  "quizId": "dia-li-chu-de-12",
+  "title": "CHỦ ĐỀ 12: MỘT SỐ HÌNH THỨC TỔ CHỨC LÃNH THỔ NÔNG NGHIỆP",
+  "timeMinutes": 40,
+  "questions": [
+    {
+      "id": 1,
+      "question": "Hình thức tổ chức lãnh thổ nông nghiệp của nước ta không phải là",
+      "options": {
+        "A": "trang trại.",
+        "B": "khu chế xuất.",
+        "C": "vùng chuyên canh.",
+        "D": "vùng nông nghiệp."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 2,
+      "question": "Hình thức tổ chức lãnh thổ nông nghiệp cao nhất ở nước ta hiện nay là",
+      "options": {
+        "A": "trang trại.",
+        "B": "vùng chuyên canh.",
+        "C": "khu công nghiệp.",
+        "D": "vùng nông nghiệp."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 3,
+      "question": "Loại hình trang trại chủ yếu ở nước ta hiện nay là",
+      "options": {
+        "A": "trang trại trồng trọt.",
+        "B": "trang trại chăn nuôi.",
+        "C": "trang trại lâm nghiệp.",
+        "D": "trang trại nuôi trồng thuỷ sản."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 4,
+      "question": "Các trang trại của nước ta hiện nay tập trung nhiều nhất ở",
+      "options": {
+        "A": "Tây Nguyên.",
+        "B": "Đông Nam Bộ.",
+        "C": "Đồng bằng sông Hồng.",
+        "D": "Đồng bằng sông Cửu Long."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 5,
+      "question": "Vùng chuyên canh cây lương thực ở nước ta tập trung tại",
+      "options": {
+        "A": "đồng bằng.",
+        "B": "trung du.",
+        "C": "miền núi.",
+        "D": "hải đảo."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 6,
+      "question": "Các trang trại ở nước ta hiện nay",
+      "options": {
+        "A": "tập trung chủ yếu tại Tây Nguyên.",
+        "B": "chỉ phục vụ thị trường nước ngoài.",
+        "C": "chưa có trong lĩnh vực ngư nghiệp.",
+        "D": "tạo ra nguyên liệu cho công nghiệp."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 7,
+      "question": "Trang trại ở nước ta hiện nay",
+      "options": {
+        "A": "không phụ thuộc điều kiện tự nhiên.",
+        "B": "chỉ xuất hiện ở khu vực đồng bằng.",
+        "C": "đã ứng dụng nhiều công nghệ mới.",
+        "D": "còn mang tính chất tự cung, tự cấp."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 8,
+      "question": "Phát biểu nào sau đây không đúng về trang trại ở nước ta hiện nay?",
+      "options": {
+        "A": "Số lượng ngày càng tăng, tập trung ở vùng núi.",
+        "B": "Chủ yếu là trang trại trồng trọt, sản lượng tăng.",
+        "C": "Tạo nhiều hàng hoá, gắn sản xuất với chế biến.",
+        "D": "Quy mô sản xuất lớn, ứng dụng kĩ thuật hiện đại."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 9,
+      "question": "Vùng chuyên canh ở nước ta hiện nay",
+      "options": {
+        "A": "tạo ra khối lượng sản phẩm lớn.",
+        "B": "phân bố toàn bộ ở vùng đồi núi.",
+        "C": "chưa có đối với ngành thủy sản.",
+        "D": "hình thành 7 vùng trên cả nước."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 10,
+      "question": "Các vùng chuyên canh của nước ta hiện nay",
+      "options": {
+        "A": "chỉ tập trung tạo sản phẩm trong ngành trồng trọt.",
+        "B": "được phân bố đồng đều giữa các địa phương, vùng.",
+        "C": "là hình thức tổ chức lãnh thổ nông nghiệp cao nhất.",
+        "D": "cho phép khai thác tốt điều kiện sinh thái mỗi vùng."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 11,
+      "question": "Một trong những đặc trưng của vùng chuyên canh ở nước ta là",
+      "options": {
+        "A": "chủ yếu sản xuất nhỏ lẻ, manh mún.",
+        "B": "tập trung vào một, vài loại cây trồng.",
+        "C": "phần lớn dùng lao động trình độ cao.",
+        "D": "quy mô giống nhau giữa các khu vực."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 12,
+      "question": "Phát biểu nào sau đây không đúng về đặc điểm của vùng chuyên canh ở nước ta?",
+      "options": {
+        "A": "Tăng cường xuất khẩu nông sản.",
+        "B": "Gắn sản xuất với khâu chế biến.",
+        "C": "Có hiệu quả kinh tế - xã hội cao.",
+        "D": "Tập trung vào chế biến nông sản."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 13,
+      "question": "Vùng nông nghiệp ở nước ta có nhiều điểm tương đồng về",
+      "options": {
+        "A": "đặc điểm địa hình, nguồn nước, trình độ dân trí.",
+        "B": "mật độ dân số, cơ sở hạ tầng, trình độ thâm canh.",
+        "C": "điều kiện sinh thái nông nghiệp, kinh tế - xã hội.",
+        "D": "trình độ lao động, diện tích lãnh thổ, thổ nhưỡng."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 14,
+      "question": "Phát biểu nào sau đây không đúng về các vùng nông nghiệp ở nước ta hiện nay?",
+      "options": {
+        "A": "Lãnh thổ nước ta hiện có 07 vùng sinh thái nông nghiệp.",
+        "B": "Mỗi vùng nông nghiệp có hướng chuyên môn hóa riêng.",
+        "C": "Là hình thức tổ chức lãnh thổ nông nghiệp cấp cao nhất.",
+        "D": "Được quy hoạch gắn liền với các vùng kinh tế trọng điểm."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 15,
+      "question": "Điều kiện sinh thái của vùng nông nghiệp Trung du và miền núi Bắc Bộ là",
+      "options": {
+        "A": "có đất feralit đỏ vàng, khí hậu phân hoá đa dạng.",
+        "B": "khí hậu cận xích đạo, đất xám phù sa cổ rộng lớn.",
+        "C": "đồng bằng châu thổ rộng lớn, có mùa đông lạnh.",
+        "D": "diện tích đất nhiễm mặn nhiều, nền nhiệt độ cao."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 16,
+      "question": "Vùng nông nghiệp Đồng bằng sông Hồng có điều kiện trồng lúa chất lượng cao chủ yếu do có",
+      "options": {
+        "A": "mật độ dân số cao, có mùa đông lạnh.",
+        "B": "đồng bằng châu thổ, nhiệt ẩm dồi dào.",
+        "C": "lao động có kinh nghiệm, diện tích lớn.",
+        "D": "sông ngòi nhiều nước, mùa đông lạnh."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 17,
+      "question": "Vùng nông nghiệp Bắc Trung Bộ trồng được nhiều loại cây công nghiệp chủ yếu do có",
+      "options": {
+        "A": "đất phù sa, khí hậu có một mùa đông lạnh.",
+        "B": "địa hình phân hoá, dân cư tập trung đông.",
+        "C": "đất feralit và đất pha cát, khí hậu thích hợp.",
+        "D": "cao nguyên badan rộng lớn, đất cát ven biển."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 18,
+      "question": "Vùng nông nghiệp Duyên hải Nam Trung Bộ có điều kiện phát triển nuôi trồng thuỷ sản chủ yếu do có",
+      "options": {
+        "A": "ít thiên tai xảy ra, nhiều loài thuỷ sản.",
+        "B": "nguồn lợi phong phú, bờ biển trải dài.",
+        "C": "nhiều vũng, vịnh, khí hậu cận xích đạo.",
+        "D": "đồng bằng ven biển, nhiều ngư trường."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 19,
+      "question": "Vùng nông nghiệp Tây Nguyên chuyên môn hoá cây cà phê do có điều kiện thuận lợi về",
+      "options": {
+        "A": "đất badan rộng lớn, khí hậu cận xích đạo.",
+        "B": "giao thông khá thuận lợi, nhiều sông lớn.",
+        "C": "nhiều cao nguyên xếp tầng, khí hậu nóng.",
+        "D": "nguồn nước đảm bảo, chế biến phát triển."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 20,
+      "question": "Điều kiện sinh thái của vùng nông nghiệp Đông Nam Bộ tạo điều kiện thuận lợi cho phát triển",
+      "options": {
+        "A": "cây công nghiệp lâu năm, lúa cao sản.",
+        "B": "cây công nghiệp nhiệt đới, cây ăn quả.",
+        "C": "chăn nuôi trâu, bò, thuỷ sản nước lạnh.",
+        "D": "cây dược liệu, đánh bắt thuỷ sản xa bờ."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 21,
+      "question": "Hoạt động đánh bắt thuỷ sản ở vùng nông nghiệp Đồng bằng sông Cửu Long được tiến hành chủ yếu ở",
+      "options": {
+        "A": "các hồ, đầm, mạng lưới sông ngòi kênh rạch.",
+        "B": "các bãi triều, đầm phá, ô trũng ở đồng bằng.",
+        "C": "mạng lưới sông ngòi, ngư trường trọng điểm.",
+        "D": "rừng ngập mặn ven biển, hệ thống kênh rạch."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 22,
+      "question": "Việc đẩy mạnh trồng trọt theo hình thức trang trại ở nước ta chủ yếu nhằm",
+      "options": {
+        "A": "tạo nhiều việc làm, mở rộng sản xuất.",
+        "B": "nâng cấp hạ tầng, mở rộng thị trường.",
+        "C": "gia tăng thu nhập, phát triển chế biến.",
+        "D": "tăng lượng hàng hóa, khai thác lợi thế."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 23,
+      "question": "Mục đích chủ yếu của việc đầu tư phát triển trang trại chăn nuôi ở nước ta hiện nay là",
+      "options": {
+        "A": "gia tăng sản lượng, khai thác tốt tài nguyên.",
+        "B": "tăng hiệu quả sản xuất, đáp ứng thị trường.",
+        "C": "nâng sức cạnh tranh, áp dụng kĩ thuật mới.",
+        "D": "phát huy tốt nguồn lực, đa dạng sản phẩm."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 24,
+      "question": "Giải pháp chủ yếu nhằm phát triển mô hình trang trại ở nước ta hiện nay là",
+      "options": {
+        "A": "gắn với tiêu thụ, ứng dụng công nghệ cao.",
+        "B": "đào tạo nhân lực, hoàn thiện cơ sở hạ tầng.",
+        "C": "đa dạng hóa sản xuất, đẩy mạnh xuất khẩu.",
+        "D": "đầu tư công nghiệp chế biến, tăng diện tích."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 25,
+      "question": "Việc hình thành các vùng chuyên canh nông nghiệp ở miền núi nước ta nhằm mục đích chủ yếu là",
+      "options": {
+        "A": "chuyên môn hóa sản xuất, đáp ứng thị trường.",
+        "B": "giải quyết việc làm, nâng cao giá trị sản phẩm.",
+        "C": "phát triển hàng hóa, nâng cao chất lượng sống.",
+        "D": "tạo nhiều nông sản, khai thác tốt các thế mạnh."
+      },
+      "correctAnswer": "C"
+    },
+    {
+      "id": 26,
+      "question": "Việc ứng dụng khoa học công nghệ vào các trang trại ở nước ta góp phần chủ yếu vào việc",
+      "options": {
+        "A": "mở rộng lãnh thổ sản xuất, nâng cao mức sống.",
+        "B": "đáp ứng nhu cầu thị trường, đa dạng sản phẩm.",
+        "C": "nâng năng suất lao động, giải quyết tốt việc làm.",
+        "D": "nâng cao giá trị nông sản, khai thác tốt tự nhiên."
+      },
+      "correctAnswer": "D"
+    },
+    {
+      "id": 27,
+      "question": "Ý nghĩa chủ yếu của tổ chức lãnh thổ nông nghiệp ở nước ta là",
+      "options": {
+        "A": "sử dụng hiệu quả điều kiện sinh thái nông nghiệp và kinh tế.",
+        "B": "giải quyết việc làm cho lao động, khai thác tốt tài nguyên đất.",
+        "C": "nâng cao mức sống, thúc đẩy quá trình chuyển dịch lao động.",
+        "D": "ứng dụng công nghệ hiện đại, nâng cao chất lượng cuộc sống."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 28,
+      "question": "Giải pháp chủ yếu nhằm đẩy mạnh sản xuất nông nghiệp chuyên canh ở nước ta là",
+      "options": {
+        "A": "hoàn thiện cơ sở hạ tầng, phát triển dịch vụ trồng trọt.",
+        "B": "ứng dụng công nghệ mới, gắn với chế biến và dịch vụ.",
+        "C": "chuyên môn hóa sản xuất, tăng lượng hàng xuất khẩu.",
+        "D": "nâng cao trình độ thâm canh, đào tạo nguồn nhân lực."
+      },
+      "correctAnswer": "B"
+    },
+    {
+      "id": 29,
+      "question": "Giải pháp chủ yếu hạn chế rủi ro trong tiêu thụ sản phẩm của vùng chuyên canh ở nước ta là",
+      "options": {
+        "A": "đa dạng cây trồng, phát triển thị trường, ứng dụng công nghệ.",
+        "B": "tích cực quảng bá, thu hút nguồn đầu tư, tập trung cây chủ lực.",
+        "C": "hoàn thiện hạ tầng, mở rộng thị trường, đầu tư vào thâm canh.",
+        "D": "tăng quy mô sản xuất, thu hút nguồn lao động, tăng năng suất."
+      },
+      "correctAnswer": "A"
+    },
+    {
+      "id": 30,
+      "question": "Ý nghĩa chủ yếu của việc hình thành vùng chuyên canh cây công nghiệp lâu năm ở nước ta là",
+      "options": {
+        "A": "phát huy thế mạnh, sản xuất hàng hóa, gắn với công nghiệp.",
+        "B": "tăng lượng nông sản, giải quyết việc làm, sản xuất tập trung.",
+        "C": "đổi mới trồng trọt, tạo nhiều nguyên liệu, phục vụ xuất khẩu.",
+        "D": "phân bố lại sản xuất, tăng hiệu quả kinh tế, đáp ứng nhu cầu."
+      },
+      "correctAnswer": "A"
+    }
+  ]
+} 
 ];
