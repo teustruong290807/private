@@ -54,6 +54,33 @@ body {
 }
 .btn-enter-quiz:hover { background-color: #138496; }
 
+/* ================= BẢNG TRANG CHỦ ================= */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.dashboard-table th, .dashboard-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-strong);
+}
+.dashboard-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+.dashboard-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+.dashboard-table td {
+  color: #444;
+  vertical-align: middle;
+}
+.col-stt { width: 5%; text-align: center; }
+.col-time { width: 15%; text-align: center; }
+.col-action { width: 15%; text-align: center; }
+.fw-bold { font-weight: bold; color: #111 !important; }
+
 /* ================= MÀN HÌNH LÀM BÀI (QUIZ) ================= */
 .quiz-container {
   display: flex; max-width: 1200px; margin: 0 auto; gap: 30px;
@@ -195,3 +222,27 @@ body {
     z-index: 999;
   }
 }
+
+/* ================= CÂU HỎI ĐÚNG/SAI (FORMAT 2025) ================= */
+.context-text {
+  font-style: italic; color: #444; line-height: 1.6; margin-bottom: 15px;
+  background: #fdfdfd; padding: 15px; border-left: 4px solid var(--surface-strong);
+}
+.tf-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+.tf-table th, .tf-table td { border: 1px solid var(--border-strong); padding: 12px 10px; }
+.tf-table th { background: var(--surface-muted); text-align: center; }
+.tf-table th:first-child { text-align: center; width: 70%; }
+.tf-table td:first-child { text-align: justify; line-height: 1.5; }
+
+.tf-btn {
+  padding: 8px 0; width: 100%; border: 1px solid var(--border-strong);
+  border-radius: 4px; cursor: pointer; background: white; font-weight: bold; transition: 0.2s;
+}
+.tf-btn:hover { background: #e9ecef; }
+.tf-btn.selected[data-answer="Đúng"] { background: var(--success-bg); color: white; border-color: var(--success-bg); }
+.tf-btn.selected[data-answer="Sai"] { background: #dc3545; color: white; border-color: #dc3545; }
+
+/* Chế độ xem lại bài cho Đúng/Sai */
+.review-mode .tf-btn { pointer-events: none; opacity: 0.4; }
+.review-mode .tf-btn.correct-ans { background: var(--success-bg) !important; color: white !important; border-color: var(--success-bg) !important; opacity: 1; }
+.review-mode .tf-btn.wrong-ans { background: #dc3545 !important; color: white !important; border-color: #dc3545 !important; opacity: 1; }
