@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Công Cụ Nhập Đề Tự Động Vào Google Sheets</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #f0f2f5; padding: 20px; }
+    .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { color: #0f9d58; margin-top: 0; }
+    label { font-weight: bold; display: block; margin-top: 15px; margin-bottom: 5px; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+    .btn { background: #0f9d58; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; margin-top: 20px; font-weight: bold; width: 100%; }
+    .btn:hover { background: #0b8043; }
+    .output-box { margin-top: 5px; background: #f8f9fa; color: #333; padding: 15px; font-family: monospace; border-radius: 4px; white-space: pre; height: 150px; overflow: auto; border: 1px solid #ddd; }
+    .hint { font-size: 13px; color: #666; background: #e8f0fe; padding: 10px; border-left: 4px solid #1a73e8; margin-bottom: 15px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🚀 Tự Động Chuyển Word Sang Google Sheets</h2>
+    
+    <div style="display: flex; gap: 15px;">
+      <div style="flex: 1;">
+        <label>ID Đề thi (Cột A):</label>
+        <input type="text" id="quizId" placeholder="VD: dia-li-12">
+      </div>
+      <div style="flex: 2;">
+        <label>Tên Đề Thi (Cột B):</label>
+        <input type="text" id="quizTitle" placeholder="VD: ĐỊA LÍ 12 - TỔ CHỨC LÃNH THỔ">
+      </div>
+      <div style="flex: 1;">
+        <label>Thời gian (Cột C):</label>
+        <input type="number" id="quizTime" value="40">
+      </div>
+    </div>
+
+    <label>Dán nội dung từ Word vào đây:</label>
+    <div class="hint">
+      <strong>QUY TẮC:</strong><br>
+      - Bắt đầu bằng <b>Câu 1.</b> hoặc <b>Câu 2.</b><br>
+      - Trắc nghiệm thường: Đủ 4 dòng <b>A. B. C. D.</b> và chốt bằng <b>Đáp án: A</b><br>
+      - Đúng/Sai: Cần có chữ <b>[Đúng/Sai]</b>, đoạn thông tin đọc hiểu (nếu có) nằm ngay dưới câu hỏi, tiếp theo là 4 dòng <b>a) b) c) d)</b> và chốt bằng <b>Đáp án: Đúng, Sai, Sai, Đúng</b>
+    </div>
+    <textarea id="rawText" rows="10" placeholder="Câu 1. Nội dung...
+A. ...
+B. ...
+C. ...
+D. ...
+Đáp án: A"></textarea>
+
+    <button class="btn" onclick="generateSheetsData()">⚡ BIẾN THÀNH DỮ LIỆU SHEETS</button>
+
+    <label style="color: #1a73e8; margin-top: 25px;">1. Dữ liệu cho tab "DanhSachDe" (Copy và dán vào ô trống đầu tiên của cột A bên tab DanhSachDe):</label>
+    <textarea id="outDanhSach" class="output-box" readonly></textarea>
+
+    <label style="color: #ea4335; margin-top: 20px;">2. Dữ liệu cho tab "CauHoi" (Copy và dán vào ô trống đầu tiên của cột A bên tab CauHoi):</label>
+    <textarea id="outCauHoi" class="output-box" readonly style="height: 250px;"></textarea>
+  </div>
+
+  <script>
+    function generateSheetsData() {
+      const qId = document.getElementById("quizId").value.trim() || "de-moi";
+      const qTitle = document.getElementById("quizTitle").value.trim() || "Tên Đề Thi";
+      const qTime = document.getElementById("quizTime").value || 45;
+      const text = document.getElementById("rawText").value;
+
+      // --- TẠO DỮ LIỆU TAB DANH SÁCH ĐỀ ---
+      const danhSachData = `${qId}\t${qTitle}\t${qTime}`;
+      document.getElementById("outDanhSach").value = danhSachData;
+
+      // --- TẠO DỮ LIỆU TAB CÂU HỎI ---
+      const blocks = text.split(/(?=Câu \d+)/i).filter(b => b.trim().length > 0);
+      let cauHoiData = "";
+
+      blocks.forEach(block => {
+        const lines = block.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        if(lines.length < 5) return;
+
+        const firstLine = lines[0];
+        const matchId = firstLine.match(/Câu (\d+)/i);
+        if(!matchId) return;
+        const id = parseInt(matchId[1]);
+
+        const isTrueFalse = firstLine.toLowerCase().includes("[đúng/sai]") || firstLine.toLowerCase().includes("(đúng/sai)");
+        
+        if (!isTrueFalse) {
+          // Trắc nghiệm thường
+          const questionText = firstLine.replace(/Câu \d+[\.:]?\s*/i, '').trim();
+          let options = {A: "", B: "", C: "", D: ""};
+          let correctAnswer = "";
+
+          lines.forEach(line => {
+            if(line.startsWith("A.")) options["A"] = line.substring(2).trim();
+            else if(line.startsWith("B.")) options["B"] = line.substring(2).trim();
+            else if(line.startsWith("C.")) options["C"] = line.substring(2).trim();
+            else if(line.startsWith("D.")) options["D"] = line.substring(2).trim();
+            else if(line.toLowerCase().startsWith("đáp án:")) {
+              correctAnswer = line.split(":")[1].trim().toUpperCase();
+            }
+          });
+
+          // Định dạng: quizId | id | type | question | context | A | B | C | D | correctAnswer
+          cauHoiData += `${qId}\t${id}\t\t${questionText}\t\t${options["A"]}\t${options["B"]}\t${options["C"]}\t${options["D"]}\t${correctAnswer}\n`;
+
+        } else {
+          // Đúng/Sai
+          let questionText = firstLine.replace(/Câu \d+[\.:]?\s*/i, '')
+                                      .replace(/\[Đúng\/Sai\]/i, '')
+                                      .replace(/\(Đúng\/Sai\)/i, '').trim();
+          let contextLines = [];
+          let statements = {a: "", b: "", c: "", d: ""};
+          let answers = [];
+          
+          let parsingState = "context"; // Trạng thái đang quét đoạn văn hay quét nhận định
+
+          for(let i = 1; i < lines.length; i++) {
+            let line = lines[i];
+            
+            if(line.match(/^[a-d][\.\)]/i)) {
+              parsingState = "statements";
+              let sId = line.charAt(0).toLowerCase();
+              statements[sId] = line.substring(2).trim();
+            } else if(line.toLowerCase().startsWith("đáp án:")) {
+              let ansString = line.split(":")[1].trim();
+              answers = ansString.split(",").map(a => a.trim());
+            } else if (parsingState === "context") {
+              contextLines.push(line);
+            }
+          }
+
+          let contextText = contextLines.join("<br>"); // Dùng thẻ br để không bị ngắt dòng trong Sheets
+          let finalAnswers = [];
+          for(let i=0; i<4; i++) {
+            if(answers[i]) {
+              finalAnswers.push(answers[i].toLowerCase().includes("đúng") || answers[i].toLowerCase() === "đ" ? "Đúng" : "Sai");
+            } else {
+              finalAnswers.push("");
+            }
+          }
+          let correctAnswerStr = finalAnswers.join(",");
+
+          // Định dạng: quizId | id | type | question | context | A | B | C | D | correctAnswer
+          cauHoiData += `${qId}\t${id}\ttrue_false\t${questionText}\t${contextText}\t${statements["a"]}\t${statements["b"]}\t${statements["c"]}\t${statements["d"]}\t${correctAnswerStr}\n`;
+        }
+      });
+
+      document.getElementById("outCauHoi").value = cauHoiData.trim();
+    }
+  </script>
+</body>
+</html>
