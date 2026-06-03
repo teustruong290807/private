@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hệ Thống Ôn Tập Trắc Nghiệm</title>
+  <title>Web Clone</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,11 +13,21 @@
     
     <div class="category-block">
       <div class="category-header">
-        <span>KHO ĐỀ THI TRẮC NGHIỆM</span>
+        <span>KHO ĐỀ</span>
         <span class="toggle-icon">-</span>
       </div>
-      <div class="quiz-list" id="quiz-list">
-        </div>
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th class="col-stt">STT</th>
+            <th>Tên Đề Thi</th>
+            <th class="col-time">Thời gian</th>
+            <th class="col-action">Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="quiz-list-tbody">
+          </tbody>
+      </table>
     </div>
   </div>
 
@@ -74,7 +84,6 @@
     </div>
   </div>
 
-  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
