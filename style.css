@@ -246,3 +246,21 @@ body {
 .review-mode .tf-btn { pointer-events: none; opacity: 0.4; }
 .review-mode .tf-btn.correct-ans { background: var(--success-bg) !important; color: white !important; border-color: var(--success-bg) !important; opacity: 1; }
 .review-mode .tf-btn.wrong-ans { background: #dc3545 !important; color: white !important; border-color: #dc3545 !important; opacity: 1; }
+
+/* ================= BẢNG XẾP HẠNG (MODAL) ================= */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+  z-index: 3000; padding: 20px;
+}
+.modal-content {
+  background: #fff; padding: 30px; border-radius: 8px; width: 100%; max-width: 600px;
+  max-height: 80vh; overflow-y: auto; position: relative;
+}
+.close-modal {
+  position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #888;
+}
+.close-modal:hover { color: #333; }
+.rank-1 { color: #d4af37; font-weight: bold; background: #fffcf0 !important; } /* Top 1 Vàng */
+.rank-2 { color: #8a9597; font-weight: bold; background: #f8f9fa !important; } /* Top 2 Bạc */
+.rank-3 { color: #cd7f32; font-weight: bold; background: #fdfaf6 !important; } /* Top 3 Đồng */
