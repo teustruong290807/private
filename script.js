@@ -1,14 +1,15 @@
-// Thay LINK_CỦA_BẠN_Ở_ĐÂY bằng URL Web App bạn vừa copy từ Google Apps Script
+// Đã gắn link API chuẩn của bạn
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx2pGlTtZBjIoUUzaezVH1iAKwmaP9rwgbXdrUBmPzLoGRO7ST_811-lxlK5_o20wi-bQ/exec";
 
-let database = []; // Biến trống, sẽ được nhồi dữ liệu từ Google Sheet vào
+let database = []; 
+let userName = ""; // Biến lưu tên người làm bài
 
 document.addEventListener("DOMContentLoaded", () => {
   const dashboardScreen = document.getElementById("dashboard-screen");
   const quizContainer = document.getElementById("quiz-container");
   const resultScreen = document.getElementById("result-screen");
   
-  const quizListEl = document.getElementById("quiz-list");
+  const quizListEl = document.getElementById("quiz-list-tbody");
   const quizContentEl = document.getElementById("quiz-content");
   const questionGridEl = document.getElementById("question-grid");
   const btnSubmit = document.getElementById("btn-submit");
@@ -20,29 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- HÀM TẢI DỮ LIỆU TỪ GOOGLE SHEETS ---
   async function loadDataFromSheet() {
-    const tbody = document.getElementById("quiz-list-tbody");
-    if (tbody) tbody.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Đang tải dữ liệu từ kho đề... ⏳</td></tr>";
+    if (quizListEl) quizListEl.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Đang tải dữ liệu từ kho đề... ⏳</td></tr>";
     
     try {
       const response = await fetch(APPS_SCRIPT_URL);
       database = await response.json();
-      renderDashboard(); // Sau khi tải xong thì in ra bảng
+      
+      // Sắp xếp đề thi theo thứ tự A-Z
+      database.sort((a, b) => a.title.localeCompare(b.title));
+      
+      renderDashboard(); 
     } catch (error) {
-      if (tbody) tbody.innerHTML = "<tr><td colspan='4' style='text-align:center; color:red;'>Lỗi tải dữ liệu. Vui lòng kiểm tra lại link Google Sheets!</td></tr>";
+      if (quizListEl) quizListEl.innerHTML = "<tr><td colspan='4' style='text-align:center; color:red;'>Lỗi tải dữ liệu. Vui lòng kiểm tra lại link Google Sheets!</td></tr>";
       console.error(error);
     }
   }
 
-  // Đổi dòng gọi hàm ở CUỐI CÙNG của file script.js từ renderDashboard() thành:
-  loadDataFromSheet();
-
-  // (Phần code các hàm renderDashboard, startSpecificQuiz... bên dưới GIỮ NGUYÊN)
-
-  // --- 3. HIỂN THỊ DANH SÁCH ĐỀ (DẠNG BẢNG) ---
+  // --- HIỂN THỊ DANH SÁCH ĐỀ (DẠNG BẢNG) ---
   function renderDashboard() {
-    const tbody = document.getElementById("quiz-list-tbody");
-    if (!tbody) return; // Tránh lỗi nếu không ở trang chủ
-    tbody.innerHTML = "";
+    if (!quizListEl) return; 
+    quizListEl.innerHTML = "";
     
     database.forEach((quiz, index) => {
       const tr = document.createElement("tr");
@@ -54,11 +52,18 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="btn-enter-quiz" data-quizid="${quiz.quizId}">Vào thi</button>
         </td>
       `;
-      tbody.appendChild(tr);
+      quizListEl.appendChild(tr);
     });
 
     document.querySelectorAll(".btn-enter-quiz").forEach(btn => {
       btn.addEventListener("click", function() {
+        // HỎI TÊN TRƯỚC KHI VÀO THI ĐỂ XẾP HẠNG
+        let name = prompt("Nhập Họ và Tên của bạn để lưu lên Bảng xếp hạng:");
+        if (!name || name.trim() === "") {
+          alert("Bạn phải nhập tên để vào thi nhé!");
+          return;
+        }
+        userName = name.trim(); // Lưu tên lại
         startSpecificQuiz(this.getAttribute("data-quizid"));
       });
     });
@@ -83,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderQuizQuestions(questions) {
     questions.forEach((item) => {
-      // Nút lưới bên trái
       const gridBtn = document.createElement("button");
       gridBtn.className = "q-btn";
       gridBtn.innerText = item.id;
@@ -93,12 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       questionGridEl.appendChild(gridBtn);
 
-      // Khối nội dung bên phải
       const qBlock = document.createElement("div");
       qBlock.className = "question-block";
       qBlock.id = `question-${item.id}`;
 
-      // PHÂN LOẠI CÂU HỎI
       if (item.type === "true_false") {
         let trHTML = "";
         item.statements.forEach(stmt => {
@@ -119,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </table>
         `;
       } else {
-        // Câu trắc nghiệm truyền thống
         let optionsHTML = "";
         for (const [letter, text] of Object.entries(item.options)) {
           optionsHTML += `
@@ -137,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function attachOptionListeners() {
-    // Logic cho câu Trắc nghiệm thường
     document.querySelectorAll(".option-item").forEach(option => {
       option.addEventListener("click", function() {
         const qId = this.getAttribute("data-question");
@@ -150,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Logic cho câu Đúng/Sai
     document.querySelectorAll(".tf-btn").forEach(btn => {
       btn.addEventListener("click", function() {
         const qId = this.getAttribute("data-question");
@@ -160,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
         this.classList.add("selected");
         userAnswers[`${qId}_${sId}`] = this.getAttribute("data-answer");
 
-        // Kiểm tra xem đã làm đủ các ý của câu Đúng/Sai chưa
         const currentQuestion = currentQuizData.questions.find(q => q.id == qId);
         let allAnswered = true;
         currentQuestion.statements.forEach(stmt => {
@@ -193,8 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function submitQuiz() {
     clearInterval(timerId); 
     let correctActions = 0, wrongActions = 0, skippedActions = 0;
-    
-    let totalMaxScore = currentQuizData.questions.length; // Mỗi câu tối đa 1 điểm
+    let totalMaxScore = currentQuizData.questions.length;
     let totalEarnedScore = 0;
 
     currentQuizData.questions.forEach(item => {
@@ -220,18 +217,16 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // Chấm điểm theo chuẩn 2025 cho 4 nhận định
         if (item.statements.length === 4) {
           if (stmtCorrect === 1) totalEarnedScore += 0.1;
           else if (stmtCorrect === 2) totalEarnedScore += 0.25;
           else if (stmtCorrect === 3) totalEarnedScore += 0.5;
           else if (stmtCorrect === 4) totalEarnedScore += 1.0;
         } else {
-          totalEarnedScore += (stmtCorrect / item.statements.length); // Fallback dự phòng
+          totalEarnedScore += (stmtCorrect / item.statements.length);
         }
 
       } else {
-        // Chấm điểm Trắc nghiệm truyền thống
         const uAns = userAnswers[item.id];
         const correctAns = item.correctAnswer;
         const correctNode = document.getElementById(`opt-${item.id}-${correctAns}`);
@@ -253,6 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
     score = Number(score.toFixed(2)); 
 
     const timeTakenSecs = Math.floor((Date.now() - startTime) / 1000);
+    
+    // TÍNH NĂNG MỚI: ĐẨY ĐIỂM, TÊN VÀ THỜI GIAN LÊN GOOGLE SHEETS
+    fetch(`${APPS_SCRIPT_URL}?action=saveScore&quizId=${currentQuizData.quizId}&name=${encodeURIComponent(userName)}&score=${score}&time=${timeTakenSecs}`)
+      .then(res => res.json())
+      .catch(err => console.error("Lỗi lưu điểm:", err));
+
     document.getElementById("final-score").innerText = score;
     document.getElementById("final-status").innerText = score >= 5 ? "(Đạt)" : "(Không đạt)";
     document.getElementById("stat-correct").innerText = correctActions;
@@ -270,12 +271,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- TÍNH NĂNG MỚI: XỬ LÝ NÚT XEM BẢNG XẾP HẠNG ---
+  document.getElementById("btn-view-rank").addEventListener("click", async () => {
+    const rankTbody = document.getElementById("rank-tbody");
+    const rankModal = document.getElementById("rank-modal");
+
+    document.getElementById("rank-quiz-title").innerText = currentQuizData.title;
+    rankTbody.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Đang tải dữ liệu xếp hạng... ⏳</td></tr>";
+    rankModal.classList.remove("hidden");
+
+    try {
+      // Gọi lên Sheets lấy danh sách xếp hạng
+      const response = await fetch(`${APPS_SCRIPT_URL}?action=getRank&quizId=${currentQuizData.quizId}`);
+      const ranks = await response.json();
+
+      rankTbody.innerHTML = "";
+      if (ranks.length === 0) {
+        rankTbody.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Chưa có ai hoàn thành bài thi này.</td></tr>";
+        return;
+      }
+
+      ranks.forEach((r, idx) => {
+        let rankClass = "";
+        if (idx === 0) rankClass = "rank-1"; // Top 1
+        else if (idx === 1) rankClass = "rank-2"; // Top 2
+        else if (idx === 2) rankClass = "rank-3"; // Top 3
+
+        let m = Math.floor(r.time / 60); let s = r.time % 60;
+        let timeStr = `${m}p ${s}s`;
+
+        rankTbody.innerHTML += `
+          <tr class="${rankClass}">
+            <td style="text-align: center; font-weight: bold;">#${idx + 1}</td>
+            <td>${r.name}</td>
+            <td style="text-align: center; font-weight: bold; color: #17a2b8;">${r.score}</td>
+            <td style="text-align: center;">${timeStr}</td>
+          </tr>
+        `;
+      });
+    } catch (error) {
+      rankTbody.innerHTML = "<tr><td colspan='4' style='text-align:center; color:red;'>Lỗi tải dữ liệu.</td></tr>";
+    }
+  });
+
+  // Tắt bảng xếp hạng
+  document.getElementById("close-rank-modal").addEventListener("click", () => {
+    document.getElementById("rank-modal").classList.add("hidden");
+  });
+
   document.getElementById("btn-retry").addEventListener("click", () => {
     resultScreen.classList.add("hidden");
     startSpecificQuiz(currentQuizData.quizId); 
   });
-
-  document.getElementById("btn-view-rank").addEventListener("click", () => { alert("Tính năng xếp hạng đang được phát triển!"); });
 
   document.getElementById("btn-view-result").addEventListener("click", () => {
     resultScreen.classList.add("hidden");
@@ -286,4 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btnSubmit.onclick = () => { window.location.reload(); };
   });
 
+  // Gọi hàm chạy ngay khi mới mở web
+  loadDataFromSheet();
 });
